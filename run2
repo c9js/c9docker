@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker run -v /root/.sshsource:/root/.sshsource -v "$PWD/projects/$5":/$5 -it -d --restart unless-stopped -p $1:$1 -p $3:$3 -e "C9_PORT=$1" -e "IP=$2" -e "PORT=$3" -e "GIT_USER=$4" -e "WORKSPACE=$5" -h $5 --name $5 c9js/c9open:latest
+
+echo "$2:$1"

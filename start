@@ -1,0 +1,16 @@
+#!/bin/bash
+
+clear
+echo "[1/2] Cleaning..."
+
+winpty docker stop $(docker ps -aq -f ancestor=c9open)
+
+clear
+echo "[2/2] Cleaning..."
+
+winpty docker rm $(docker ps -aq -f ancestor=c9open)
+
+clear
+echo "Starting..."
+
+./run 8000 192.168.0.111 3000-3010 c9js c9docker

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+clear
+echo "[1/5] Building..."
+winpty docker stop $(docker ps -aq -f ancestor=c9open)
+
+clear
+echo "[2/5] Building..."
+winpty docker rm $(docker ps -aq -f ancestor=c9open)
+
+clear
+echo "[3/5] Building..."
+if [ $1 == -f &> /dev/null ]; then
+    winpty docker rmi $(docker images -aq)
+else
+    winpty docker rmi c9open
+fi
+
+clear
+echo "[4/5] Building..."
+
+winpty docker build -t c9open .
+
+clear
+echo "[5/5] Building..."
+
+./start
